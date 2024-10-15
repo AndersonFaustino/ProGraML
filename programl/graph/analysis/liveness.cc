@@ -71,9 +71,9 @@ Status LivenessAnalysis::Init() {
   while (!workList.empty()) {
     ++stepCount;
 
-    if (stepCount > std::max(graph().node_size() * 2, 5000)) {
+    if (stepCount > std::max(graph().node_size() * 2, 50000)) {
       return Status(error::FAILED_PRECONDITION,
-                    "Failed to terminate liveness computation in 5000 steps");
+                    "Failed to terminate liveness computation in 50000 steps");
     }
 
     int node = workList.front();

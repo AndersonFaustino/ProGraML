@@ -98,9 +98,9 @@ Status DominanceAnalysis::ComputeDominators(
         // Error if failed to converge after a generous number of time steps.
         // In the future we may want to extend this value or remove the check
         // entirely.
-        if (*dataFlowSteps > 1000) {
+        if (*dataFlowSteps > 10000) {
           return Status(error::FAILED_PRECONDITION,
-                        "Dominance fixed-point not found in 1000 steps");
+                        "Dominance fixed-point not found in 10000 steps");
         }
         (*dominators)[node] = newDom;
         changed = true;
