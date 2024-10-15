@@ -30,18 +30,19 @@ filegroup(
         ":graph2dot",
         ":graph2json",
         ":llvm2graph-10",
-        ":llvm2graph-3.8",
-        ":llvm2graph-6",
+        # Not used: ":llvm2graph-3.8",
+        # Not used: ":llvm2graph-6",
         ":xla2graph",
-        # Not used by current Python API: ":analyze",
-        # Not used by current Python API: ":graph2cdfg",
-        # Not used by current Python API: ":graph2seq",
-        # Not used by current Python API: ":pbq",
+        ":analyze",
+        ":graph2cfg",
+	":graph2cdfg",
+        ":graph2seq",
+        ":pbq",
     ] + select({
         "@llvm//:darwin": [],
         "//conditions:default": [
             ":libLLVMPolly-10.0.0",
-            ":libLLVMPolly-6.0.0",
+            # Not used: ":libLLVMPolly-6.0.0",
         ],
     }),
     visibility = ["//visibility:public"],
@@ -125,6 +126,20 @@ cc_binary(
     deps = [
         "//programl:version_header",
         "//programl/graph/format:cdfg",
+        "//programl/proto:programl_cc",
+        "//programl/util:stdin_fmt",
+        "//programl/util:stdout_fmt",
+        "@labm8//labm8/cpp:app",
+    ],
+)
+
+cc_binary(
+    name = "graph2cfg",
+    srcs = ["graph2cfg.cc"],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//programl:version_header",
+        "//programl/graph/format:cfg",
         "//programl/proto:programl_cc",
         "//programl/util:stdin_fmt",
         "//programl/util:stdout_fmt",

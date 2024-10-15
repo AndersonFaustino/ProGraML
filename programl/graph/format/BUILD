@@ -17,6 +17,20 @@
 # limitations under the License.
 
 cc_library(
+    name = "cfg",
+    srcs = ["cfg.cc"],
+    hdrs = ["cfg.h"],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//programl/graph:features",
+        "//programl/proto:programl_cc",
+        "@com_google_absl//absl/container:flat_hash_map",
+        "@com_google_absl//absl/container:flat_hash_set",
+        "@labm8//labm8/cpp:logging",
+    ],
+)
+
+cc_library(
     name = "cdfg",
     srcs = ["cdfg.cc"],
     hdrs = ["cdfg.h"],
